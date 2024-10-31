@@ -1,0 +1,230 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Oniro"
+    },
+    {
+      "name": "version",
+      "value": "version"
+    },
+    {
+      "name": "app_intro",
+      "value": "App Introduction"
+    },
+    {
+      "name": "app_author",
+      "value": "App Author"
+    },
+    {
+      "name": "repo",
+      "value": "Open Source Repository"
+    },
+    {
+      "name": "community",
+      "value": "Open Source Community"
+    },
+    {
+      "name": "app_center",
+      "value": "OpenHarmony-Free Open Source  App Center"
+    },
+    {
+      "name": "indie_dev",
+      "value": "Independent Developer / Open Source Contributor / Stay True"
+    },
+    {
+      "name": "about_author",
+      "value": "About the Author"
+    },
+    {
+      "name": "app",
+      "value": "App"
+    },
+    {
+      "name": "game",
+      "value": "Game"
+    },
+    {
+      "name": "app_details",
+      "value": "App Details"
+    },
+    {
+      "name": "app_tags",
+      "value": "App Tags"
+    },
+    {
+      "name": "app_pkg_name",
+      "value": "App Package Name"
+    },
+    {
+      "name": "current_version",
+      "value": "Current Version"
+    },
+    {
+      "name": "developer",
+      "value": "Developer"
+    },
+    {
+      "name": "release_date",
+      "value": "Release Date"
+    },
+    {
+      "name": "app_game_search",
+      "value": "App and Game..."
+    },
+    {
+      "name": "search",
+      "value": "Search"
+    },
+    {
+      "name": "few_apps_no_search",
+      "value": "Too Few Apps, No Need to Search!"
+    },
+    {
+      "name": "inclusion_stats",
+      "value": "Apps Statistics"
+    },
+    {
+      "name": "total",
+      "value": "Total"
+    },
+    {
+      "name": "latest_announcement",
+      "value": "Latest Announcement"
+    },
+    {
+      "name": "home",
+      "value": "Home"
+    },
+    {
+      "name": "settings",
+      "value": "Settings"
+    },
+    {
+      "name": "download_management",
+      "value": "Download Management"
+    },
+    {
+      "name": "app_management",
+      "value": "App Management"
+    },
+    {
+      "name": "app_metadata_management",
+      "value": "App Metadata Management"
+    },
+    {
+      "name": "clear_cache",
+      "value": "Clear Cache"
+    },
+    {
+      "name": "clear_local_pkgs",
+      "value": "Clear All Locally Downloaded App Installation Packages"
+    },
+    {
+      "name": "about_foh",
+      "value": "About F-OH"
+    },
+    {
+      "name": "to_be_implemented",
+      "value": "To Be Implemented"
+    },
+    {
+      "name": "confirm_clear_cache",
+      "value": "Confirm to Clear Cache"
+    },
+    {
+      "name": "clear_cache_warning",
+      "value": "This Operation Will Clear All Locally Downloaded App Installation Packages"
+    },
+    {
+      "name": "cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "confirm",
+      "value": "Confirm"
+    },
+    {
+      "name": "clear_cache_failed",
+      "value": "Failed to Clear Cache:"
+    },
+    {
+      "name": "clear_cache_done",
+      "value": "Cache Cleared"
+    },
+    {
+      "name": "info_invalid",
+      "value": "Application information is invalid"
+    },
+    {
+      "name": "download_link_invalid",
+      "value": "Application download link is invalid"
+    },
+    {
+      "name": "download_failed",
+      "value": "Download failed"
+    },
+    {
+      "name": "open_failed_app_not_found",
+      "value": "Opening failed: application does not exist"
+    },
+    {
+      "name": "fails",
+      "value": "fails："
+    },
+    {
+      "name": "succeeds",
+      "value": "succeeds"
+    },
+    {
+      "name": "Copied",
+      "value": "Copied"
+    },
+    {
+      "name": "open",
+      "value": "Open"
+    },
+    {
+      "name": "install",
+      "value": "Install"
+    },
+    {
+      "name": "update",
+      "value": "Update"
+    },
+    {
+      "name": "network_error",
+      "value": "Network Error"
+    },
+    {
+      "name": "download_management_pending",
+      "value": "Download management not yet implemented"
+    },
+    {
+      "name": "app_management_pending",
+      "value": "Application management not yet implemented"
+    },
+    {
+      "name": "metadata_management_pending",
+      "value": "Application metadata source management not yet implemented"
+    },
+    {
+      "name": "our_fav",
+      "value": "Our Favourites"
+    },
+    {
+      "name": "top_picks",
+      "value": "Top Picks for Your Device"
+    }
+
+
+  ]
+}
