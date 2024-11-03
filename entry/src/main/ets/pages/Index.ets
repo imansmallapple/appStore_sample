@@ -1,16 +1,20 @@
 import WindowStageUtil from '../utils/WindowStageUtil'
 import { HomePage } from './HomePage'
-import window from '@ohos.window';
-
+import window from '@ohos.window'
 
 @Entry
 @Component
 struct Index {
+
   private controller: TabsController = new TabsController()
   @State currentIndex: number = 0
   @State selectedFontColor: string = '#007DFF'
   @State fontColor: string = '#182431'
-  windowStage?: window.WindowStage
+
+  onPageShow() {
+    console.info('IndexComponent onPageShow');
+    this.changeLFS()
+  }
 
   @Builder
   TabBarBuilder(index: number, title: string | Resource, icon: Resource, iconSelected: Resource) {
@@ -74,10 +78,18 @@ struct Index {
   }
 
   changeLFS() {
+    // 从 AppStorage 获取 windowStage 实例
+    const windowStage = AppStorage.get<window.WindowStage>("windowStage");
+
+    if (!windowStage) {
+      console.error("windowStage is not available in AppStorage.");
+      return;
+    }
+
     if (this.currentIndex == 3) {
-      WindowStageUtil.setLayoutFullScreen(this.windowStage, '#f3f4f6', WindowStageUtil.COLOR_BLACK, '#f7f7f7', WindowStageUtil.COLOR_BLACK);
+      WindowStageUtil.setLayoutFullScreen(windowStage, '#f3f4f6', WindowStageUtil.COLOR_BLACK, '#f7f7f7', WindowStageUtil.COLOR_BLACK);
     } else {
-      WindowStageUtil.setLayoutFullScreen(this.windowStage, WindowStageUtil.COLOR_WHITE, WindowStageUtil.COLOR_BLACK, '#f7f7f7', WindowStageUtil.COLOR_BLACK);
+      WindowStageUtil.setLayoutFullScreen(windowStage, WindowStageUtil.COLOR_WHITE, WindowStageUtil.COLOR_BLACK, '#f7f7f7', WindowStageUtil.COLOR_BLACK);
     }
   }
 }
