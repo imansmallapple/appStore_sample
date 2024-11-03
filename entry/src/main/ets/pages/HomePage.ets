@@ -29,7 +29,7 @@ export struct HomePage {
   build() {
     Stack({ alignContent: Alignment.TopStart }) {
       Column() {
-        Scroll() { // 使用滚动容器确保见面
+        Scroll() { // 使用滚动容器确保可见
           Column() {
             // 页面标题
             Navigation()
