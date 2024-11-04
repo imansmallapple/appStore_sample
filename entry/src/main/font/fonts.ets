@@ -1,6 +1,6 @@
 
 // 定义 Font 接口
-interface Font {
+export interface Font {
   familyName: string;
   familySrc: string;
 }
@@ -18,7 +18,7 @@ interface Fonts {
 }
 
 //define fonts as lists of objects
-const fonts: Fonts = {
+export const fonts: Fonts = {
   semi_bold: {
     familyName: 'SemiBold',
     familySrc: '/font/PlusJakartaSans-semiBold.ttf',
@@ -49,4 +49,4 @@ const fonts: Fonts = {
   }
 };
 
-export default fonts;
+// export default fonts;

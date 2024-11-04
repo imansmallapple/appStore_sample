@@ -1,5 +1,6 @@
 import WindowStageUtil from '../utils/WindowStageUtil'
 import { HomePage } from './HomePage'
+import  SettingPage from './SettingPage'
 import window from '@ohos.window'
 
 @Entry
@@ -62,8 +63,7 @@ struct Index {
         .tabBar(this.TabBarBuilder(2, $r('app.string.game'), $r('app.media.ic_game_normal'), $r('app.media.ic_game_active')))
 
         TabContent() {
-          //Settings()
-          Text('Settings')
+          SettingPage()
         }
         .tabBar(this.TabBarBuilder(3, $r('app.string.settings'), $r('app.media.ic_search_normal'), $r('app.media.ic_search_active')))
       }

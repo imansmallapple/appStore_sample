@@ -1,10 +1,9 @@
 import promptAction from '@ohos.promptAction'
 import constant from '@ohos.bluetooth.constant'
-import fonts from '../../font/fonts'
+import { fonts } from '../../font/fonts'
 
 const ToastDuration = 2000
 
-@Entry
 @Component
 export struct HomePage {
   @State changeValue: string = ''
@@ -13,6 +12,10 @@ export struct HomePage {
   @State totalCount: number = 0;
   @State appCount: number = 0;
   @State gameCount: number = 0;
+
+  ResourceToString(resource:Resource):string{
+    return getContext(this).resourceManager.getStringSync(resource)
+  }
 
   @Builder
   NavigationTitle() {
@@ -45,8 +48,9 @@ export struct HomePage {
               value: this.changeValue,
               placeholder: (Object)($r('app.string.app_game_search')),
               controller: this.controller
-            })
-              .searchButton('search')
+            }) // todo: Replace the 'Search' text into resource type
+               //.searchButton(this.ResourceToString($r('app.string.search')))
+              .searchButton('搜索')
               .width('100%')
               .height(40)
               .backgroundColor('#F5F5F5')
@@ -80,6 +84,7 @@ export struct HomePage {
             .curve(Curve.Linear)
             .onChange((index: number) => {
               console.info(index.toString())
+              console.info(getContext(this).resourceManager.getStringSync($r('app.string.search')).toString())
             })
             .margin({ top: 10 })
 
