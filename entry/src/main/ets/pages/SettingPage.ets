@@ -21,6 +21,7 @@ export default struct SettingPage {
         .fontWeight(500)
         //.margin({left: -25})
     }.alignItems(HorizontalAlign.Start)
+    .justifyContent(FlexAlign.Center)
     .width('100%')
     .height('100%')
   }

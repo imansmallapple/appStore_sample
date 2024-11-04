@@ -25,8 +25,11 @@ export struct HomePage {
         .fontSize(26)
         .fontWeight(500)
         .fontFamily(fonts.italic.familyName)
-    }.alignItems(HorizontalAlign.Start)
+    }
+    .justifyContent(FlexAlign.Center)
+    .alignItems(HorizontalAlign.Start)
     .width('100%')
+    .height('100%')
   }
 
   build() {
