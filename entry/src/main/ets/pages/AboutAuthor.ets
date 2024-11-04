@@ -29,8 +29,11 @@ struct AboutAuthor {
         .fontColor('#182431')
         .fontSize(26)
         .fontWeight(500)
-    }.alignItems(HorizontalAlign.Start)
+    }
+    .justifyContent(FlexAlign.Center)
+    .alignItems(HorizontalAlign.Start)
     .width('100%')
+    .height('100%')
   }
 
   build() {

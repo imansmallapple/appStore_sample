@@ -2,6 +2,7 @@
   "src": [
     "pages/Index",
     "pages/AboutApp",
-    "pages/AboutAuthor"
+    "pages/AboutAuthor",
+    "pages/AppPage"
   ]
 }
