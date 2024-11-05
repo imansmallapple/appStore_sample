@@ -32,7 +32,7 @@ struct AppDetail {
   onPageShow() {
     const params = router.getParams() as RouterParams
     this.appInfo = new AppInfo(params.appInfo)
-    this.localVersionName = params.localVersionName
+    this.localVersionName = params.localVersionName as string
     // todo: uncomment later
     console.info('AboutComponent onPageShow');
     // WindowStageUtil.setLayoutFullScreen(globalThis.windowStage, '#ffffff', WindowStageUtil.COLOR_BLACK, '#ffffff', WindowStageUtil.COLOR_BLACK);
@@ -107,7 +107,10 @@ struct AppDetail {
                 ListItem() { InfoRow({icon: $r('app.media.ic_flags'), title: $r('app.string.current_version'), info: this.appInfo.version, showRightArrow: false}) }
                 ListItem() { InfoRow({icon: $r('app.media.ic_laptop'), title: $r('app.string.developer'), info: this.appInfo.vender, showRightArrow: false}) }
                 ListItem() { InfoRow({icon: $r('app.media.ic_link'), title: $r('app.string.repo'), info: this.appInfo.openSourceAddress, clickHandler: ()=> {
-                  router.pushUrl({ url: 'pages/Browser', params: {title: this.appInfo.name, url: this.appInfo.openSourceAddress} });
+                  router.pushUrl({ url: 'pages/Browser', params: {
+                    title: this.appInfo.name,
+                    url: this.appInfo.openSourceAddress
+                  } });
                 }}) }
                 ListItem() { InfoRow({icon: $r('app.media.ic_send'), title: $r('app.string.release_date'), info: this.appInfo.releaseTime, showRightArrow: false}) }
               }.divider({ strokeWidth: 0.5, color: '#d6d6d6', startMargin: 40, endMargin: 0 })

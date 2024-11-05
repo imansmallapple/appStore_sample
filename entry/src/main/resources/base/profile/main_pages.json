@@ -4,6 +4,7 @@
     "pages/AboutApp",
     "pages/AboutAuthor",
     "pages/AppPage",
-    "pages/AppDetail"
+    "pages/AppDetail",
+    "pages/Browser"
   ]
 }
