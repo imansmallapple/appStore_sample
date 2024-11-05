@@ -14,10 +14,9 @@ export struct HomePage {
   @State appCount: number = 0;
   @State gameCount: number = 0;
   //for mockApps
-  @State private totalData: Array<AppInfo>=[]
+  @State private totalData: Array<AppInfo> = []
 
-
-  ResourceToString(resource:Resource):string{
+  ResourceToString(resource: Resource): string {
     return getContext(this).resourceManager.getStringSync(resource)
   }
 
@@ -55,8 +54,8 @@ export struct HomePage {
               value: this.changeValue,
               placeholder: (Object)($r('app.string.app_game_search')),
               controller: this.controller
-            }) // todo: Replace the 'Search' text into resource type
-               //.searchButton(this.ResourceToString($r('app.string.search')))
+            })// todo: Replace the 'Search' text into resource type
+              //.searchButton(this.ResourceToString($r('app.string.search')))
               .searchButton('搜索')
               .width('100%')
               .height(40)
