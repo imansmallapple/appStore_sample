@@ -1,6 +1,7 @@
 import promptAction from '@ohos.promptAction'
 import constant from '@ohos.bluetooth.constant'
-import { fonts } from '../../font/fonts'
+import { fonts } from '../font/fonts'
+import { AppInfo } from '../model/AppInfo'
 
 const ToastDuration = 2000
 
@@ -12,6 +13,9 @@ export struct HomePage {
   @State totalCount: number = 0;
   @State appCount: number = 0;
   @State gameCount: number = 0;
+  //for mockApps
+  @State private totalData: Array<AppInfo>=[]
+
 
   ResourceToString(resource:Resource):string{
     return getContext(this).resourceManager.getStringSync(resource)
@@ -176,7 +180,6 @@ export struct HomePage {
                 .border({ width: 0.7, radius: 15, color: '#ebebeb' })
               }
             }.margin({ top: 15 })
-
           }
           .width('100%')
           .padding({

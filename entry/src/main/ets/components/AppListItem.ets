@@ -6,7 +6,7 @@ import fs from '@ohos.file.fs';
 import bundleManager from '@ohos.bundle.bundleManager';
 import hilog from '@ohos.hilog';
 import router from '@ohos.router';
-import { registerAllFonts } from '../../font/registerFonts';
+import { registerAllFonts } from '../font/registerFonts';
 import common from '@ohos.app.ability.common';
 import { BusinessError } from '@ohos.base';
 

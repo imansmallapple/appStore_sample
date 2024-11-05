@@ -3,8 +3,8 @@ import WindowStageUtil from '../utils/WindowStageUtil';
 import { SettingRow } from '../components/Settings';
 import promptAction from '@ohos.promptAction';
 import router from '@ohos.router';
-import { registerAllFonts } from '../../font/registerFonts';
-import { fonts } from '../../font/fonts'
+import { registerAllFonts } from '../font/registerFonts';
+import { fonts } from '../font/fonts'
 
 const ToastDuration = 1000
 const AUTHOR_NAME = "westinyang"
