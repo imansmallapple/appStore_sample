@@ -45,7 +45,7 @@ export struct InfoRow {
     .width('100%')
     .height(48)
     .onClick(this.clickHandler || ((e) => {
-      let pasteData = pasteboard.createData(pasteboard.MIMETYPE_TEXT_PLAIN, this.info.toString())
+      let pasteData = pasteboard.createData(pasteboard.MIMETYPE_TEXT_PLAIN,  this.info?.toString() || "")
       pasteboard.getSystemPasteboard()
       let systemPasteboard = pasteboard.getSystemPasteboard();
       systemPasteboard.setData(pasteData, (err, data) => {

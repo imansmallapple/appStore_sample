@@ -47,7 +47,6 @@ export default struct App {
             List({ space: 0, initialIndex: 0 }) {
               ForEach(this.appList, (item: AppInfo) => {
                 ListItem() {
-                  //Text(item.name)
                   AppListItem({appInfo: item})
                 }
               }, (item: AppInfo, index) => index + JSON.stringify(item))
