@@ -8,7 +8,9 @@ export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
     let filesDir = this.context.filesDir;
+    let abilityContext = this.context;
     AppStorage.setOrCreate("filesDir", filesDir);
+    AppStorage.setOrCreate("abilityContext", abilityContext);
   }
 
   onDestroy(): void {

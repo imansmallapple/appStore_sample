@@ -2,6 +2,8 @@ import WindowStageUtil from '../utils/WindowStageUtil'
 import { HomePage } from './HomePage'
 import  SettingPage from './SettingPage'
 import window from '@ohos.window'
+import App from './AppPage';
+import { AppType } from '../model/AppInfo'
 
 @Entry
 @Component
@@ -51,14 +53,12 @@ struct Index {
         .tabBar(this.TabBarBuilder(0, $r('app.string.home'), $r('app.media.ic_home_normal'), $r('app.media.ic_home_active')))
 
         TabContent() {
-          //App({appType: AppType.APP})
-          Text('Applications')
+           App({appType: AppType.APP})
         }
         .tabBar(this.TabBarBuilder(1, $r('app.string.app'), $r('app.media.ic_app_normal'), $r('app.media.ic_app_active')))
 
         TabContent() {
-          //App({appType: AppType.GAME})
-          Text('Games')
+          App({appType: AppType.GAME})
         }
         .tabBar(this.TabBarBuilder(2, $r('app.string.game'), $r('app.media.ic_game_normal'), $r('app.media.ic_game_active')))
 

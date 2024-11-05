@@ -1,25 +1,24 @@
 import { ObjectUtils } from '../utils/ObjectUtils';
 import { ds_server } from '../../data/DataSource';
 
-// todo: uncomment after import ds_server
 class AppInfo {
-  constructor(source: Partial<AppInfo>) {
+  constructor(source?: Partial<AppInfo>) {
     ObjectUtils.assign(this, source);
   }
 
   /* 元数据 */
-  id: number
-  name: string
-  desc: string
-  icon: string
-  vender: string
-  packageName: string
-  version: string
-  hapUrl: string
-  type: string
-  tags: string
-  openSourceAddress: string
-  releaseTime: string
+  id: number = 0
+  name: string = ''
+  desc: string = ''
+  icon: string = ''
+  vender: string = ''
+  packageName: string = ''
+  version: string = ''
+  hapUrl: string = ''
+  type: string = ''
+  tags: string = ''
+  openSourceAddress: string = ''
+  releaseTime: string = ''
   /* 扩展数据 */
   // 应用状态
   status: AppStatus = AppStatus.NOT_INSTALLED
