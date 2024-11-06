@@ -41,7 +41,6 @@ export default struct App {
           .hideBackButton(true)
           .border({ width: { bottom: 0.5 }, color: '#c9c9c9' })
           .padding({ left: 15, right: 15 })
-
         Scroll() {
           Column() {
             List({ space: 0, initialIndex: 0 }) {
