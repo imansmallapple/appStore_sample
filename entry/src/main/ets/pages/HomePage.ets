@@ -1,7 +1,10 @@
 import promptAction from '@ohos.promptAction'
 import constant from '@ohos.bluetooth.constant'
 import { fonts } from '../font/fonts'
-import { AppInfo } from '../model/AppInfo'
+import { AppInfo, AppType } from '../model/AppInfo'
+import { DataSource } from '../data/DataSource'
+import { HomePageData } from '../model/HomePageData'
+import { registerAllFonts } from '../font/registerFonts'
 
 const ToastDuration = 2000
 
@@ -35,6 +38,25 @@ export struct HomePage {
     .height('100%')
   }
 
+  aboutToAppear() {
+    // DataSource.getHomePageData((data: HomePageData) =>{
+    //   this.homePageData = data;
+    // }, (err) => {
+    //   promptAction.showToast({ message: $r('app.string.network_error'), duration: ToastDuration });
+    // });
+
+    DataSource.getAppList(AppType.APP, (data:[], totalCount:number)=>{
+      this.totalCount = totalCount;
+      this.appCount = (data as []).length;
+      this.gameCount = totalCount - this.appCount;
+    })
+
+    console.log(`${this.totalData.length}`)
+    //For Oniro Fonts
+    // uncomment会导致乱码
+    // registerAllFonts()
+  }
+
   build() {
     Stack({ alignContent: Alignment.TopStart }) {
       Column() {
@@ -54,9 +76,9 @@ export struct HomePage {
               value: this.changeValue,
               placeholder: (Object)($r('app.string.app_game_search')),
               controller: this.controller
-            })// todo: Replace the 'Search' text into resource type
-              //.searchButton(this.ResourceToString($r('app.string.search')))
-              .searchButton('搜索')
+            })
+              .searchButton(this.ResourceToString($r('app.string.search')))
+              // .searchButton('搜索')
               .width('100%')
               .height(40)
               .backgroundColor('#F5F5F5')

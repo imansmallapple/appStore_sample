@@ -1,6 +1,6 @@
 import { AppInfo, AppType } from '../model/AppInfo';
 import AppListItem from '../components/AppListItem';
-import { DataSource } from '../../data/DataSource';
+import { DataSource } from '../data/DataSource';
 
 @Entry
 @Component

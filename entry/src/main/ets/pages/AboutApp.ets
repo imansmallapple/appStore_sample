@@ -10,12 +10,10 @@ const APP_VERSION = "1.3.5";
 @Entry
 @Component
 struct AboutApp {
-  // todo: windowStage is not valid yet, check when use simulator or real device
-  // todo: temporarily commented the following code, uncomment after checking
   onPageShow() {
-   // const windowStage = AppStorage.get<window.WindowStage>("windowStage");
-    console.info('AboutComponent onPageShow');
-   // WindowStageUtil.setLayoutFullScreen(windowStage, '#f3f4f6', WindowStageUtil.COLOR_BLACK, '#f3f4f6', WindowStageUtil.COLOR_BLACK);
+    const windowStage = AppStorage.get<window.WindowStage>("windowStage");
+    console.info('About app onPageShow');
+   WindowStageUtil.setLayoutFullScreen(windowStage, '#f3f4f6', WindowStageUtil.COLOR_BLACK, '#f3f4f6', WindowStageUtil.COLOR_BLACK);
   }
 
   @Builder NavigationTitle() {

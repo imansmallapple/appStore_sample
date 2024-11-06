@@ -1,6 +1,6 @@
 import webview from '@ohos.web.webview';
 import hilog from '@ohos.hilog';
-import parameter from '@ohos.systemparameter'
+import systemparameter from '@ohos.systemParameterEnhance';
 import router from '@ohos.router'
 import WindowStageUtil from '../utils/WindowStageUtil';
 import window from '@ohos.window';
@@ -23,7 +23,7 @@ const PHONE_USER_AGENT: string = 'Mozilla/5.0 (Linux; Android 10.0; ohos) AppleW
 struct Browser {
   @State title: string = ''
   @State url: string = ''
-  @State isPhone: boolean = false
+  @State isPhone: boolean = true
   controller: webview.WebviewController = new webview.WebviewController()
 
   onPageShow() {
@@ -59,7 +59,6 @@ struct Browser {
         .width('100%')
         .titleMode(NavigationTitleMode.Mini)
         .hideBackButton(false)
-
       // 加载在线网页
       Web({ src: this.url, controller: this.controller })
         .width('100%')
@@ -74,7 +73,10 @@ struct Browser {
         })
         .fileAccess(true)
         .domStorageAccess(true)
-        .userAgent(this.isPhone ? PHONE_USER_AGENT : PAD_USER_AGENT)
+        .onControllerAttached(() => {
+          this.controller.loadUrl(this.url)
+          this.controller.setCustomUserAgent(this.isPhone ? PHONE_USER_AGENT : PAD_USER_AGENT)
+        })
         .onPageBegin((event) => {
           hilog.info(0x0, '[Index]', `onPageBegin= ${JSON.stringify(event)}`)
         })
@@ -89,7 +91,7 @@ struct Browser {
 
   aboutToAppear() {
     try {
-      let deviceType = parameter.getSync("const.build.characteristics")
+      let deviceType = systemparameter.getSync("const.build.characteristics")
       // 修改为：default 也认为是 phone
       if (deviceType === 'phone' || deviceType === 'default') {
         this.isPhone = true

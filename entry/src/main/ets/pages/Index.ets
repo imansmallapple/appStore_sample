@@ -53,7 +53,8 @@ struct Index {
         .tabBar(this.TabBarBuilder(0, $r('app.string.home'), $r('app.media.ic_home_normal'), $r('app.media.ic_home_active')))
 
         TabContent() {
-           App({appType: AppType.APP})
+          Text('App')
+        //  App({appType: AppType.APP})
         }
         .tabBar(this.TabBarBuilder(1, $r('app.string.app'), $r('app.media.ic_app_normal'), $r('app.media.ic_app_active')))
 

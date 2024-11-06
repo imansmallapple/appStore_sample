@@ -1,5 +1,5 @@
 import { ObjectUtils } from '../utils/ObjectUtils';
-import { ds_server } from '../../data/DataSource';
+import { ds_server } from '../data/DataSource';
 
 class AppInfo {
   constructor(source?: Partial<AppInfo>) {

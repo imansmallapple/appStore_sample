@@ -5,6 +5,7 @@ import promptAction from '@ohos.promptAction';
 import router from '@ohos.router';
 import { registerAllFonts } from '../font/registerFonts';
 import { fonts } from '../font/fonts'
+import window from '@ohos.window';
 
 const ToastDuration = 1000
 const AUTHOR_NAME = "westinyang"
@@ -16,11 +17,10 @@ struct AboutAuthor {
   aboutToAppear(){
     registerAllFonts();
   }
-  // todo: windowStage is not valid yet, check when use simulator or real device
-  // todo: temporarily commented the following code, uncomment after checking
   onPageShow() {
-    console.info('AboutComponent onPageShow');
-    // WindowStageUtil.setLayoutFullScreen(globalThis.windowStage, '#f3f4f6', WindowStageUtil.COLOR_BLACK, '#f3f4f6', WindowStageUtil.COLOR_BLACK);
+    const windowStage = AppStorage.get<window.WindowStage>("windowStage");
+    console.info('About author onPageShow');
+    WindowStageUtil.setLayoutFullScreen(windowStage, '#f3f4f6', WindowStageUtil.COLOR_BLACK, '#f3f4f6', WindowStageUtil.COLOR_BLACK);
   }
 
   @Builder NavigationTitle() {
@@ -76,13 +76,15 @@ struct AboutAuthor {
         .fontColor('#182431')
         .fontWeight(500)
         .padding({ top: 8 })
-        .fontFamily(fonts.semi_bold.familyName)
+      // todo: 不明白为什么会出现乱码
+        //.fontFamily(fonts.semi_bold.familyName)
 
       Text(AUTHOR_INFO)
         .fontSize(14)
         .fontColor('#99182431')
         .margin({top: 4})
-        .fontFamily(fonts.regular.familyName)
+      // todo: 不明白为什么会出现乱码
+        //.fontFamily(fonts.regular.familyName)
     }
     .alignItems(HorizontalAlign.Center)
     .align(Alignment.Top)

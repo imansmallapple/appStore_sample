@@ -1,5 +1,5 @@
-import { HomePageData } from '../ets/model/HomePageData';
-import {AppInfo, AppType} from '../ets/model/AppInfo';
+import { HomePageData } from '../model/HomePageData';
+import {AppInfo, AppType} from '../model/AppInfo';
 import http from '@ohos.net.http';
 
 // 服务器地址
