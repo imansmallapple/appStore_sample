@@ -21,6 +21,7 @@ const PHONE_USER_AGENT: string = 'Mozilla/5.0 (Linux; Android 10.0; ohos) AppleW
 @Entry
 @Component
 struct Browser {
+  @State isLoading: boolean = false
   @State title: string = ''
   @State url: string = ''
   @State isPhone: boolean = true
@@ -59,6 +60,17 @@ struct Browser {
         .width('100%')
         .titleMode(NavigationTitleMode.Mini)
         .hideBackButton(false)
+      if (this.isLoading) {
+        Column() {
+          LoadingProgress()
+            .color(Color.Blue)
+            .width(50)
+            .margin({ bottom: '10%' })
+        }
+        .height('100%')
+        .justifyContent(FlexAlign.Center)
+      }
+
       // 加载在线网页
       Web({ src: this.url, controller: this.controller })
         .width('100%')
@@ -78,6 +90,7 @@ struct Browser {
           this.controller.setCustomUserAgent(this.isPhone ? PHONE_USER_AGENT : PAD_USER_AGENT)
         })
         .onPageBegin((event) => {
+          this.isLoading = false
           hilog.info(0x0, '[Index]', `onPageBegin= ${JSON.stringify(event)}`)
         })
         .onPageEnd((event) => {
@@ -87,9 +100,13 @@ struct Browser {
           hilog.info(0x0, '[Index]', `onProgressChange`)
         })
     }
+    .width('100%')
+    .height('100%')
   }
 
+  //执行其build()函数之前执行
   aboutToAppear() {
+    this.isLoading = true
     try {
       let deviceType = systemparameter.getSync("const.build.characteristics")
       // 修改为：default 也认为是 phone
