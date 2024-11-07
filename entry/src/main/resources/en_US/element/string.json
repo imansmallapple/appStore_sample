@@ -49,6 +49,14 @@
       "value": "App"
     },
     {
+      "name": "app_version",
+      "value": "Version"
+    },
+    {
+      "name": "oniro_plateform",
+      "value": "Oniro Plateform"
+    },
+    {
       "name": "game",
       "value": "Game"
     },

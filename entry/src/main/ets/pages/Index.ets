@@ -1,6 +1,6 @@
 import WindowStageUtil from '../utils/WindowStageUtil'
 import { HomePage } from './HomePage'
-import  SettingPage from './SettingPage'
+import SettingPage from './SettingPage'
 import window from '@ohos.window'
 import App from './AppPage';
 import { AppType } from '../model/AppInfo'
@@ -8,7 +8,6 @@ import { AppType } from '../model/AppInfo'
 @Entry
 @Component
 struct Index {
-
   private controller: TabsController = new TabsController()
   @State currentIndex: number = 0
   @State selectedFontColor: string = '#007DFF'
@@ -53,13 +52,13 @@ struct Index {
         .tabBar(this.TabBarBuilder(0, $r('app.string.home'), $r('app.media.ic_home_normal'), $r('app.media.ic_home_active')))
 
         TabContent() {
-          Text('App')
-        //  App({appType: AppType.APP})
+          //  Text('App')
+          App({ appType: AppType.APP })
         }
         .tabBar(this.TabBarBuilder(1, $r('app.string.app'), $r('app.media.ic_app_normal'), $r('app.media.ic_app_active')))
 
         TabContent() {
-          App({appType: AppType.GAME})
+          App({ appType: AppType.GAME })
         }
         .tabBar(this.TabBarBuilder(2, $r('app.string.game'), $r('app.media.ic_game_normal'), $r('app.media.ic_game_active')))
 
