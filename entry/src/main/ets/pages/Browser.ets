@@ -4,6 +4,7 @@ import systemparameter from '@ohos.systemParameterEnhance';
 import router from '@ohos.router'
 import WindowStageUtil from '../utils/WindowStageUtil';
 import window from '@ohos.window';
+import { BusinessError } from '@ohos.base';
 
 interface RouterParams {
   title: string,
@@ -27,6 +28,14 @@ struct Browser {
   @State url: string = ''
   @State isPhone: boolean = true
   controller: webview.WebviewController = new webview.WebviewController()
+
+  // 扩展浏览器对象
+  extObj: ExtObj = {
+    test: (str) => {
+      console.log("extObj.test: " + str)
+      return "test " + str
+    }
+  }
 
   onPageShow() {
     const windowStage = AppStorage.get<window.WindowStage>("windowStage");
@@ -74,30 +83,14 @@ struct Browser {
 
       if (this.isHttpError) {
         Column() {
-          Column(){
+          Column() {
 
-          Image($r('app.media.ic_no_wifi'))
-            .width('20%')
-            .opacity(0.4)
-          Text("Seems you don't have Internet")
-            .opacity(0.4)
-            .margin(5)
-          Button('Reload')
-            .fontColor(Color.Black)
-            .backgroundColor(Color.Orange)
-            .height('5%')
-            .width('35%')
-            .type(ButtonType.Normal)
-            .fontSize(14)
-            .borderRadius(5)
-            .fontWeight(FontWeight.Medium)
-            .opacity(0.6)
-            .onClick(() => {
-              // todo: Refresh function to be implemented
-              this.isLoading = true
-              // this.controller.loadUrl(this.url)
-            })
-            .margin(10)
+            Image($r('app.media.ic_no_wifi'))
+              .width('20%')
+              .opacity(0.4)
+            Text("Seems you don't have Internet")
+              .opacity(0.4)
+              .margin(5)
           }
           .margin({
             bottom: '10%'
@@ -106,6 +99,28 @@ struct Browser {
         .height('100%')
         .justifyContent(FlexAlign.Center)
       }
+      // todo: Button to be removed, checking for refresh function
+      Button('Reload')
+        .fontColor(Color.Black)
+        .backgroundColor(Color.Orange)
+        .height('5%')
+        .width('35%')
+        .type(ButtonType.Normal)
+        .fontSize(14)
+        .borderRadius(5)
+        .fontWeight(FontWeight.Medium)
+        .opacity(0.6)
+        .onClick(() => {
+          try {
+            this.isLoading = true
+            this.controller.refresh();
+            this.controller.loadUrl(this.url)
+          } catch (error) {
+            hilog.error(0x0, `ErrorCode: ${(error as BusinessError).code}`, `Message: ${(error as BusinessError).message}`);
+          }
+        })
+        .margin(10)
+
 
       // 加载在线网页
       Web({ src: this.url, controller: this.controller })
@@ -136,11 +151,12 @@ struct Browser {
         .onProgressChange((event) => {
           hilog.info(0x0, '[Index]', `onProgressChange`)
         })
-        .onErrorReceive((event)=>{
-          if(event){
+        .onErrorReceive((event) => {
+          if (event) {
             this.isHttpError = true
           }
         })
+
     }
     .width('100%')
     .height('100%')
@@ -157,14 +173,6 @@ struct Browser {
       }
     } catch (e) {
       hilog.info(0x0, '[Index]', `getSync unexpected error: ${e}`)
-    }
-  }
-
-  // 扩展浏览器对象
-  extObj: ExtObj = {
-    test: (str) => {
-      console.log("extObj.test: " + str)
-      return "test " + str
     }
   }
 }
