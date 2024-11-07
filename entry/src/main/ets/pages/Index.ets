@@ -36,7 +36,7 @@ struct Index {
     .height('100%')
     .width('100%')
     .backgroundColor('#f7f7f7')
-    .border({ width: { top: 0.5 }, color: '#bbbbbb' })
+    .border({ width: { top: 0.5 }, color: '#f8bbbbbb' })
   }
 
   build() {

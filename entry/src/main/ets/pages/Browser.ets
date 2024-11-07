@@ -22,6 +22,7 @@ const PHONE_USER_AGENT: string = 'Mozilla/5.0 (Linux; Android 10.0; ohos) AppleW
 @Component
 struct Browser {
   @State isLoading: boolean = false
+  @State isHttpError: boolean = false
   @State title: string = ''
   @State url: string = ''
   @State isPhone: boolean = true
@@ -71,6 +72,41 @@ struct Browser {
         .justifyContent(FlexAlign.Center)
       }
 
+      if (this.isHttpError) {
+        Column() {
+          Column(){
+
+          Image($r('app.media.ic_no_wifi'))
+            .width('20%')
+            .opacity(0.4)
+          Text("Seems you don't have Internet")
+            .opacity(0.4)
+            .margin(5)
+          Button('Reload')
+            .fontColor(Color.Black)
+            .backgroundColor(Color.Orange)
+            .height('5%')
+            .width('35%')
+            .type(ButtonType.Normal)
+            .fontSize(14)
+            .borderRadius(5)
+            .fontWeight(FontWeight.Medium)
+            .opacity(0.6)
+            .onClick(() => {
+              // todo: Refresh function to be implemented
+              this.isLoading = true
+              // this.controller.loadUrl(this.url)
+            })
+            .margin(10)
+          }
+          .margin({
+            bottom: '10%'
+          })
+        }
+        .height('100%')
+        .justifyContent(FlexAlign.Center)
+      }
+
       // 加载在线网页
       Web({ src: this.url, controller: this.controller })
         .width('100%')
@@ -85,6 +121,7 @@ struct Browser {
         })
         .fileAccess(true)
         .domStorageAccess(true)
+        .zoomAccess(true)
         .onControllerAttached(() => {
           this.controller.loadUrl(this.url)
           this.controller.setCustomUserAgent(this.isPhone ? PHONE_USER_AGENT : PAD_USER_AGENT)
@@ -98,6 +135,11 @@ struct Browser {
         })
         .onProgressChange((event) => {
           hilog.info(0x0, '[Index]', `onProgressChange`)
+        })
+        .onErrorReceive((event)=>{
+          if(event){
+            this.isHttpError = true
+          }
         })
     }
     .width('100%')
