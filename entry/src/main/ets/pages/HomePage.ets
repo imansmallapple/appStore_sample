@@ -45,7 +45,7 @@ export struct HomePage {
     //   promptAction.showToast({ message: $r('app.string.network_error'), duration: ToastDuration });
     // });
 
-    DataSource.getAppList(AppType.APP, (data:[], totalCount:number)=>{
+    DataSource.getAppList(AppType.APP, (data: [], totalCount: number) => {
       this.totalCount = totalCount;
       this.appCount = (data as []).length;
       this.gameCount = totalCount - this.appCount;
@@ -77,8 +77,7 @@ export struct HomePage {
               placeholder: (Object)($r('app.string.app_game_search')),
               controller: this.controller
             })
-              .searchButton(this.ResourceToString($r('app.string.search')))
-              // .searchButton('搜索')
+              .searchButton(this.ResourceToString($r('app.string.search')))// .searchButton('搜索')
               .width('100%')
               .height(40)
               .backgroundColor('#F5F5F5')

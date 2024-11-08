@@ -28,7 +28,6 @@ struct Browser {
   @State url: string = ''
   @State isPhone: boolean = true
   controller: webview.WebviewController = new webview.WebviewController()
-
   // 扩展浏览器对象
   extObj: ExtObj = {
     test: (str) => {
@@ -62,14 +61,43 @@ struct Browser {
 
   build() {
     Column() {
-      // 页面标题
-      Navigation()
-        .title(this.NavigationTitle())
-        .hideToolBar(true)
-        .height(56)
-        .width('100%')
-        .titleMode(NavigationTitleMode.Mini)
-        .hideBackButton(false)
+      Stack() {
+        // 页面标题
+        Navigation()
+          .title(this.NavigationTitle())
+          .hideToolBar(true)
+          .height(56)
+          .width('100%')
+          .titleMode(NavigationTitleMode.Mini)
+          .hideBackButton(false)
+
+        Button() {
+          Image($r('app.media.ic_refresh'))
+            .height(30)
+            .width(30)
+        }
+        .zIndex(1)
+        .fontColor(Color.Black)
+        .backgroundColor(Color.White)
+        .height('5%')
+        .type(ButtonType.Circle)
+        .fontWeight(FontWeight.Medium)
+        .opacity(0.8)
+        .margin({
+          right: 15
+        })
+        .onClick(() => {
+          try {
+            this.isLoading = true
+            this.controller.refresh();
+            this.controller.loadUrl(this.url)
+          } catch (error) {
+            hilog.error(0x0, `ErrorCode: ${(error as BusinessError).code}`, `Message: ${(error as BusinessError).message}`);
+          }
+        })
+      }
+      .alignContent(Alignment.End)
+
       if (this.isLoading) {
         Column() {
           LoadingProgress()
@@ -99,28 +127,6 @@ struct Browser {
         .height('100%')
         .justifyContent(FlexAlign.Center)
       }
-      // todo: Button to be removed, checking for refresh function
-      Button('Reload')
-        .fontColor(Color.Black)
-        .backgroundColor(Color.Orange)
-        .height('5%')
-        .width('35%')
-        .type(ButtonType.Normal)
-        .fontSize(14)
-        .borderRadius(5)
-        .fontWeight(FontWeight.Medium)
-        .opacity(0.6)
-        .onClick(() => {
-          try {
-            this.isLoading = true
-            this.controller.refresh();
-            this.controller.loadUrl(this.url)
-          } catch (error) {
-            hilog.error(0x0, `ErrorCode: ${(error as BusinessError).code}`, `Message: ${(error as BusinessError).message}`);
-          }
-        })
-        .margin(10)
-
 
       // 加载在线网页
       Web({ src: this.url, controller: this.controller })
