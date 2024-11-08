@@ -49,10 +49,11 @@ enum AppStatus {
   UPDATABLE = 2, // 可更新
 }
 
+// todo: to be changed with resource type
 enum AppActionText {
-  OPEN = "打开",
-  INSTALL = "安装",
-  UPDATE = "更新"
+  OPEN = "Open",
+  INSTALL = "Install",
+  UPDATE = "Update"
 }
 
 // 定义映射接口，将标识符与实际资源字符串对应

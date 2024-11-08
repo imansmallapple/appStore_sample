@@ -81,7 +81,7 @@ struct AppDetail {
               // 右 应用信息
               Column() {
                 Text(this.appInfo.name)
-                  .fontSize(22)
+                  .fontSize(19)
                   .margin({ top: 2, bottom: 5 })
                   .maxLines(1)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })

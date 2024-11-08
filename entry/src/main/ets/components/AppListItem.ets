@@ -122,7 +122,7 @@ export default struct AppListItem {
           Button(this.appInfo.actionText.toString())
             .width('100%')
             .height(26)
-            .fontSize(14)
+            .fontSize(11)
             .fontColor('#3478f6')
             .backgroundColor('#eeeeee')
             .onClick(() => {

@@ -57,7 +57,7 @@ export struct InfoRow {
         // 提示
         try {
           promptAction.showToast({
-            message: getContext(this).resourceManager.getStringSync($r('app.string.Copied')) + this.title,
+            message: getContext(this).resourceManager.getStringSync($r('app.string.Copied')),
             duration: 1000,
           });
         } catch (error) {

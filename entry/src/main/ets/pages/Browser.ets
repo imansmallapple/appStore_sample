@@ -62,14 +62,40 @@ struct Browser {
   build() {
     Column() {
       Stack() {
-        // 页面标题
-        Navigation()
-          .title(this.NavigationTitle())
-          .hideToolBar(true)
-          .height(56)
-          .width('100%')
-          .titleMode(NavigationTitleMode.Mini)
-          .hideBackButton(false)
+        Row() {
+
+          Button() {
+            Image($r('app.media.ic_back'))
+              .height(20)
+              .width(20)
+          }
+          .backgroundColor(Color.White)
+          .height('5%')
+          .type(ButtonType.Circle)
+          .fontWeight(FontWeight.Medium)
+          .opacity(0.8)
+          .margin({
+            left: 15
+          })
+          .onClick(() => {
+            try {
+              this.isLoading = true
+              this.controller.refresh();
+              this.controller.loadUrl(this.url)
+            } catch (error) {
+              hilog.error(0x0, `ErrorCode: ${(error as BusinessError).code}`, `Message: ${(error as BusinessError).message}`);
+            }
+          })
+
+          // 页面标题
+          Navigation()
+            .title(this.NavigationTitle())
+            .hideToolBar(true)
+            .height(56)
+            .width('100%')
+            .titleMode(NavigationTitleMode.Mini)
+            .hideBackButton(true)
+        }
 
         Button() {
           Image($r('app.media.ic_refresh'))
@@ -99,33 +125,11 @@ struct Browser {
       .alignContent(Alignment.End)
 
       if (this.isLoading) {
-        Column() {
-          LoadingProgress()
-            .color(Color.Blue)
-            .width(50)
-            .margin({ bottom: '10%' })
-        }
-        .height('100%')
-        .justifyContent(FlexAlign.Center)
+        LoadComponent()
       }
 
       if (this.isHttpError) {
-        Column() {
-          Column() {
-
-            Image($r('app.media.ic_no_wifi'))
-              .width('20%')
-              .opacity(0.4)
-            Text("Seems you don't have Internet")
-              .opacity(0.4)
-              .margin(5)
-          }
-          .margin({
-            bottom: '10%'
-          })
-        }
-        .height('100%')
-        .justifyContent(FlexAlign.Center)
+        HttpErrorComponent()
       }
 
       // 加载在线网页
@@ -149,6 +153,9 @@ struct Browser {
         })
         .onPageBegin((event) => {
           this.isLoading = false
+
+          // 在重新加载的时候
+          this.isHttpError = false
           hilog.info(0x0, '[Index]', `onPageBegin= ${JSON.stringify(event)}`)
         })
         .onPageEnd((event) => {
@@ -180,5 +187,41 @@ struct Browser {
     } catch (e) {
       hilog.info(0x0, '[Index]', `getSync unexpected error: ${e}`)
     }
+  }
+}
+
+@Component
+export struct LoadComponent {
+  build() {
+    Column() {
+      LoadingProgress()
+        .color(Color.Blue)
+        .width(50)
+        .margin({ bottom: '10%' })
+    }
+    .height('100%')
+    .justifyContent(FlexAlign.Center)
+  }
+}
+
+@Component
+export struct HttpErrorComponent {
+  build() {
+    Column() {
+      Column() {
+
+        Image($r('app.media.ic_no_wifi'))
+          .width('20%')
+          .opacity(0.4)
+        Text("Seems you don't have Internet")
+          .opacity(0.4)
+          .margin(5)
+      }
+      .margin({
+        bottom: '10%'
+      })
+    }
+    .height('100%')
+    .justifyContent(FlexAlign.Center)
   }
 }
