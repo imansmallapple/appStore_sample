@@ -57,6 +57,10 @@
       "value": "Oniro Plateform"
     },
     {
+      "name": "oniro_appStore",
+      "value": "Oniro App Store"
+    },
+    {
       "name": "game",
       "value": "Game"
     },
