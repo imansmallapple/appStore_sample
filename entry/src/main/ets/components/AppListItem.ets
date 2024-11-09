@@ -9,6 +9,7 @@ import router from '@ohos.router';
 import { registerAllFonts } from '../font/registerFonts';
 import common from '@ohos.app.ability.common';
 import { BusinessError } from '@ohos.base';
+import UIAbility from '@ohos.app.ability.UIAbility';
 
 const ToastDuration = 1000
 
@@ -178,7 +179,7 @@ export default struct AppListItem {
     // 从 AppStorage 获取 filesDir 数据
     let filesDir = AppStorage.get<string>("filesDir");
     // todo: Check if the way of import abilityContext is correct or not
-    //let abilityContext = AppStorage.get<BaseContext>("abilityContext");
+    let abilityContext = AppStorage.get<UIAbility>("abilityContext");
     // 下载路径，示例: /data/storage/el2/base/haps/entry/files/org.ohosdev.deviceinfo-v1.0.0.hap
     let filePath = filesDir + '/' + this.appInfo.packageName + '-' + this.appInfo.version + ".hap";
 
@@ -189,6 +190,7 @@ export default struct AppListItem {
         this.installApp(filePath);
       } else {
         // 不存在，下载并安装
+        // promptAction.showToast({ message: 'APP NOT EXIST!!!!', duration: ToastDuration });
         try {
           request.downloadFile(this.abilityContext, {
             url: this.appInfo.getHapUrl(),

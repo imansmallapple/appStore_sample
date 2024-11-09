@@ -5,7 +5,7 @@ import http from '@ohos.net.http';
 // 服务器地址
 // 本地调试请拉取F-OH-Data仓库到本地，并启动一个静态资源服务器，使用本地服务器，尽量避免使用线上服务器地址
 // const ds_server: string = "";
-const ds_server: string = "http://80.158.63.151:5000/"
+const ds_server: string = "https://3e46-193-0-116-21.ngrok-free.app/"
 // API Path
 const api_homePageData: string = ds_server + "/homePageData.json";
 const api_allAppList: string = ds_server + "/allAppList.json";
