@@ -64,6 +64,25 @@ class DataSource {
       }
     });
   }
+
+  async fetchHttpCode(): Promise<number> {
+    try {
+      let httpRequest = http.createHttp();
+      const response = await new Promise<number>((resolve, reject) => {
+        httpRequest.request(ds_server, (err: Error, data: http.HttpResponse) => {
+          if (!err) {
+            resolve(data.responseCode);
+          } else {
+            reject(err);
+          }
+        });
+      });
+      return response; // 返回响应码
+    } catch (error) {
+      console.error('Error fetching HTTP code:', error);
+      return -1; // 返回一个错误码
+    }
+  }
 }
 
 export {DataSource, ds_server}

@@ -129,7 +129,9 @@ struct Browser {
       }
 
       if (this.isHttpError) {
-        HttpErrorComponent()
+        HttpErrorComponent({
+          text: 'Seems you don\'t have Internet'
+        })
       }
 
       // 加载在线网页
@@ -206,6 +208,7 @@ export struct LoadComponent {
 
 @Component
 export struct HttpErrorComponent {
+  @Prop text:string = ''
   build() {
     Column() {
       Column() {
@@ -213,7 +216,7 @@ export struct HttpErrorComponent {
         Image($r('app.media.ic_no_wifi'))
           .width('20%')
           .opacity(0.4)
-        Text("Seems you don't have Internet")
+        Text(this.text)
           .opacity(0.4)
           .margin(5)
       }
