@@ -64,8 +64,8 @@ struct AboutApp {
   LogoAndVersionComponent() {
     Column() {
       Image($r("app.media.ONIRO"))
-        .height(72)
-        .width(72)
+        .height(100)
+        .width(100)
         .border({ width: 0.7, radius: 16, color: '#ebebeb' })
       Text($r('app.string.EntryAbility_label'))
         .fontSize(18)
