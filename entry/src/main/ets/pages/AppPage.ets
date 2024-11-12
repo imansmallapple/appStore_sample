@@ -1,17 +1,26 @@
 import { AppInfo, AppType } from '../model/AppInfo';
 import AppListItem from '../components/AppListItem';
 import { DataSource } from '../data/DataSource';
+import hilog from '@ohos.hilog';
+import { HttpErrorComponent } from './Browser';
 
 @Entry
 @Component
 export default struct App {
   appType: AppType = AppType.APP
   @State appList: AppInfo[] = []
+  @State res: number = 0 // 定义一个状态变量用于保存 HTTP 响应码
 
   aboutToAppear() {
-    DataSource.getAppList(this.appType, (data: AppInfo[]) => {
-      this.appList = data;
-    })
+    const source = new DataSource()
+    source.fetchHttpCode().then((code) => {
+      this.res = code; // 更新状态变量以触发 UI 的重新渲染
+      if (code == 200) {
+        DataSource.getAppList(this.appType, (data: AppInfo[]) => {
+          this.appList = data;
+        })
+      }
+    });
   }
 
   @Builder
@@ -41,12 +50,20 @@ export default struct App {
           .hideBackButton(true)
           .border({ width: { bottom: 0.5 }, color: '#c9c9c9' })
           .padding({ left: 15, right: 15 })
+
+        //bad http response
+        if (this.res == -1) {
+          HttpErrorComponent({
+            text: 'Can\'t connect to the server'
+          })
+        }
+
         Scroll() {
           Column() {
             List({ space: 0, initialIndex: 0 }) {
               ForEach(this.appList, (item: AppInfo) => {
                 ListItem() {
-                  AppListItem({appInfo: item})
+                  AppListItem({ appInfo: item })
                 }
               }, (item: AppInfo, index) => index + JSON.stringify(item))
             }
