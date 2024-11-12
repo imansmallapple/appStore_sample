@@ -2,23 +2,29 @@ import { AppInfo, AppType } from '../model/AppInfo';
 import AppListItem from '../components/AppListItem';
 import { DataSource } from '../data/DataSource';
 import hilog from '@ohos.hilog';
-import { HttpErrorComponent } from './Browser';
+import { HttpErrorComponent, LoadComponent } from './Browser';
 
 @Entry
 @Component
 export default struct App {
-  @State res: number = 0 // 定义一个状态变量用于保存 HTTP 响应码
+  @State httpCode: number = 0 // 定义一个状态变量用于保存 HTTP 响应码
   appType: AppType = AppType.APP
   @State appList: AppInfo[] = []
+  @State isLoading: boolean = false
 
   aboutToAppear() {
+    this.isLoading = true;
     const source = new DataSource()
     source.fetchHttpCode().then((code) => {
-      this.res = code; // 更新状态变量以触发 UI 的重新渲染
+      this.httpCode = code; // 更新状态变量以触发 UI 的重新渲染
       if (code == 200) {
         DataSource.getAppList(this.appType, (data: AppInfo[]) => {
           this.appList = data;
+          this.isLoading = false;
         })
+      }
+      else {
+        this.isLoading = false;
       }
     });
   }
@@ -50,9 +56,12 @@ export default struct App {
           .hideBackButton(true)
           .border({ width: { bottom: 0.5 }, color: '#c9c9c9' })
           .padding({ left: 15, right: 15 })
-
+        // 根据 isLoading 状态条件渲染 loadComponent 或 Scroll
+        if (this.isLoading) {
+          LoadComponent() // 显示加载组件
+        }
         //bad http response
-        if (this.res == -1) {
+        if (this.httpCode == -1) {
           HttpErrorComponent({
             text: 'Can\'t connect to the server'
           })
