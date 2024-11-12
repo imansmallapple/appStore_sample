@@ -10,7 +10,6 @@ export default struct App {
   @State res: number = 0 // 定义一个状态变量用于保存 HTTP 响应码
   appType: AppType = AppType.APP
   @State appList: AppInfo[] = []
-  @State res: number = 0 // 定义一个状态变量用于保存 HTTP 响应码
 
   aboutToAppear() {
     const source = new DataSource()
