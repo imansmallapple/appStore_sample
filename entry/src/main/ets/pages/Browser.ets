@@ -5,10 +5,12 @@ import router from '@ohos.router'
 import WindowStageUtil from '../utils/WindowStageUtil';
 import window from '@ohos.window';
 import { BusinessError } from '@ohos.base';
+import { RouterParams } from './AppDetail'
 
-interface RouterParams {
+interface RouterParameters {
   title: string,
-  url: string
+  url: string,
+  params: RouterParams
 }
 
 interface ExtObj {
@@ -25,6 +27,7 @@ struct Browser {
   @State isLoading: boolean = false
   @State isHttpError: boolean = false
   @State title: string = ''
+  @State localParams: RouterParams | null = null;
   @State url: string = ''
   @State isPhone: boolean = true
   controller: webview.WebviewController = new webview.WebviewController()
@@ -38,11 +41,23 @@ struct Browser {
 
   onPageShow() {
     const windowStage = AppStorage.get<window.WindowStage>("windowStage");
-    let params = router.getParams() as RouterParams
+    let params = router.getParams() as RouterParameters
     this.title = params.title
     this.url = params.url
+    this.localParams = params.params
     console.info('AboutComponent onPageShow');
     WindowStageUtil.setLayoutFullScreen(windowStage, WindowStageUtil.COLOR_WHITE, WindowStageUtil.COLOR_BLACK, WindowStageUtil.COLOR_WHITE, WindowStageUtil.COLOR_BLACK);
+  }
+
+  onBackPress(): boolean | void {
+    if(this.localParams){
+      //todo: Temporarily make backbtton back to index to avoid crash
+      router.back({
+        url: 'pages/Index'
+      })
+    }else{
+      router.back()
+    }
   }
 
   @Builder
@@ -78,13 +93,9 @@ struct Browser {
             left: 15
           })
           .onClick(() => {
-            try {
-              this.isLoading = true
-              this.controller.refresh();
-              this.controller.loadUrl(this.url)
-            } catch (error) {
-              hilog.error(0x0, `ErrorCode: ${(error as BusinessError).code}`, `Message: ${(error as BusinessError).message}`);
-            }
+            router.back({
+              url: 'pages/Index'
+            });
           })
 
           // 页面标题
