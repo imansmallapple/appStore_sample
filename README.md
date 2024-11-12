@@ -33,7 +33,6 @@ New project development requirements
 4. [Add application start animation](#add-application-start-animation)
 5. [Add UI when can't connect to server](#add-ui-when-cannot-connect-to-server)
 
-# 项目优化
 
 ## fonts Occur Error
 
